@@ -1,0 +1,56 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "XmDatabase",
+						"type": "DatasetReference"
+					},
+					"name": "valoresIndicadores"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "XmDatabase",
+						"type": "DatasetReference"
+					},
+					"name": "valoresCopia"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          ID as integer,",
+				"          Fecha as date,",
+				"          Valor as decimal(10,2),",
+				"          Consecutivo as integer,",
+				"          Indicador as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> valoresIndicadores",
+				"valoresIndicadores sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ID as integer,",
+				"          Fecha as date,",
+				"          Valor as decimal(10,2),",
+				"          Consecutivo as integer,",
+				"          Indicador as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> valoresCopia"
+			]
+		}
+	}
+}

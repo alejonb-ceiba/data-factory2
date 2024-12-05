@@ -1,0 +1,9 @@
+{
+	"name": "XM-Prueba",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "960bbff2-982e-4966-bca8-0499c75294df",
+		"tenantId": "3c5be194-3676-4ec3-8d25-2c05a7fa1881"
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"name": "SqlServerTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "alejobd",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "A302INDICADOR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "A302FECHA",
+				"type": "date"
+			},
+			{
+				"name": "A302VALOR",
+				"type": "varchar"
+			},
+			{
+				"name": "A302CONSECUTIVO",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DIA",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "BASICAS",
+			"table": "T302VALORESINDICADORES"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
