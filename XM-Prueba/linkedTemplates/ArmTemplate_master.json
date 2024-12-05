@@ -1,0 +1,98 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "XM-Prueba"
+		},
+		"Xm_database_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Xm_database'"
+		},
+		"alejobd_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'alejobd'"
+		},
+		"Xm_database_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "xmserverdb.database.windows.net"
+		},
+		"Xm_database_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "XM_Database"
+		},
+		"Xm_database_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "xmadmin"
+		},
+		"alejobd_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "45.169.253.67,8358"
+		},
+		"alejobd_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "db_alejo"
+		},
+		"alejobd_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "alejo"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "XM-Prueba_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Xm_database_password": {
+						"value": "[parameters('Xm_database_password')]"
+					},
+					"alejobd_password": {
+						"value": "[parameters('alejobd_password')]"
+					},
+					"Xm_database_properties_typeProperties_server": {
+						"value": "[parameters('Xm_database_properties_typeProperties_server')]"
+					},
+					"Xm_database_properties_typeProperties_database": {
+						"value": "[parameters('Xm_database_properties_typeProperties_database')]"
+					},
+					"Xm_database_properties_typeProperties_userName": {
+						"value": "[parameters('Xm_database_properties_typeProperties_userName')]"
+					},
+					"alejobd_properties_typeProperties_server": {
+						"value": "[parameters('alejobd_properties_typeProperties_server')]"
+					},
+					"alejobd_properties_typeProperties_database": {
+						"value": "[parameters('alejobd_properties_typeProperties_database')]"
+					},
+					"alejobd_properties_typeProperties_userName": {
+						"value": "[parameters('alejobd_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

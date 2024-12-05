@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "XM-Prueba"
+		},
+		"Xm_database_password": {
+			"value": ""
+		},
+		"alejobd_password": {
+			"value": ""
+		},
+		"Xm_database_properties_typeProperties_server": {
+			"value": "xmserverdb.database.windows.net"
+		},
+		"Xm_database_properties_typeProperties_database": {
+			"value": "XM_Database"
+		},
+		"Xm_database_properties_typeProperties_userName": {
+			"value": "xmadmin"
+		},
+		"alejobd_properties_typeProperties_server": {
+			"value": "45.169.253.67,8358"
+		},
+		"alejobd_properties_typeProperties_database": {
+			"value": "db_alejo"
+		},
+		"alejobd_properties_typeProperties_userName": {
+			"value": "alejo"
+		}
+	}
+}
