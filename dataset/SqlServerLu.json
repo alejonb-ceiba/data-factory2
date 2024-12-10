@@ -1,0 +1,42 @@
+{
+	"name": "SqlServerLu",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Xm_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Fecha",
+				"type": "date"
+			},
+			{
+				"name": "Valor",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Consecutivo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Indicador",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Valores"
+		}
+	}
+}
