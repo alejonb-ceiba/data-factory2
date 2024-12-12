@@ -41,6 +41,9 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "filter2"
 				}
 			],
 			"scriptLines": [
@@ -83,8 +86,9 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
-				"flatten1 derive(ultimo_dia_mes = subDays(addMonths(:mes, 1), dayOfMonth(:mes)),",
-				"          mes := toDate(valores.vigenteDesde)) ~> derivedColumn1"
+				"flatten1 derive(ultimo_dia_mes = lastDayOfMonth(toDate(valores.vigenteDesde)),",
+				"          mes := toDate(valores.vigenteDesde)) ~> derivedColumn1",
+				"derivedColumn1 filter(ultimo_dia_mes == toDate(valores.vigenteDesde)) ~> filter2"
 			]
 		}
 	}
