@@ -38,6 +38,9 @@
 				},
 				{
 					"name": "flatten1"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -79,7 +82,9 @@
 				"          valores = body.valores",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> flatten1"
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 derive(ultimo_dia_mes = subDays(addMonths(:mes, 1), dayOfMonth(:mes)),",
+				"          mes := toDate(valores.vigenteDesde)) ~> derivedColumn1"
 			]
 		}
 	}
