@@ -35,10 +35,17 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "flatten1"
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          body as (numeroPagina as boolean, tamanoPagina as short, totalRegistros as short, valores as (activoDesde as string, fechaCreacion as string, fechaModificacion as string, idParametro as string, idVigenciaParametro as string, valor as double, vigenteDesde as string, vigenteHasta as string)[]),",
+				"          headers as [string,string]",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     httpMethod: 'GET',",
 				"     timeout: 30,",
@@ -66,7 +73,13 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"window1 filter(numero_fila == 1) ~> filter1"
+				"window1 filter(numero_fila == 1) ~> filter1",
+				"sourceApiAlejo foldDown(unroll(body.valores),",
+				"     mapColumn(",
+				"          valores = body.valores",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1"
 			]
 		}
 	}
