@@ -19,7 +19,14 @@
 					"name": "sourceBdXMLu"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				},
+				{
+					"name": "sink2"
+				}
+			],
 			"transformations": [
 				{
 					"name": "ObtenerRegistrosIndicador9"
@@ -88,7 +95,15 @@
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"flatten1 derive(ultimo_dia_mes = lastDayOfMonth(toDate(valores.vigenteDesde)),",
 				"          mes := toDate(valores.vigenteDesde)) ~> derivedColumn1",
-				"derivedColumn1 filter(ultimo_dia_mes == toDate(valores.vigenteDesde)) ~> filter2"
+				"derivedColumn1 filter(ultimo_dia_mes == toDate(valores.vigenteDesde)) ~> filter2",
+				"filter2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink2"
 			]
 		}
 	}
