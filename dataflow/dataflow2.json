@@ -21,9 +21,17 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "SqlServerLu",
+						"type": "DatasetReference"
+					},
 					"name": "sink1"
 				},
 				{
+					"dataset": {
+						"referenceName": "SqlServerLu",
+						"type": "DatasetReference"
+					},
 					"name": "sink2"
 				}
 			],
@@ -98,10 +106,34 @@
 				"derivedColumn1 filter(ultimo_dia_mes == toDate(valores.vigenteDesde)) ~> filter2",
 				"filter2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          ID as integer,",
+				"          Fecha as date,",
+				"          Valor as decimal(10,2),",
+				"          Consecutivo as integer,",
+				"          Indicador as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          ID as integer,",
+				"          Fecha as date,",
+				"          Valor as decimal(10,2),",
+				"          Consecutivo as integer,",
+				"          Indicador as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> sink2"
 			]
