@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SqlServerLu",
+						"referenceName": "SqlServerLuData",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -107,11 +107,7 @@
 				"filter2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          ID as integer,",
-				"          Fecha as date,",
-				"          Valor as decimal(10,2),",
-				"          Consecutivo as integer,",
-				"          Indicador as integer",
+				"          Dato as date",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -119,7 +115,10 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          Dato = ultimo_dia_mes",
+				"     )) ~> sink1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",

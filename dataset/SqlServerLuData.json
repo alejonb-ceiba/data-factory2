@@ -1,0 +1,21 @@
+{
+	"name": "SqlServerLuData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Xm_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Dato",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TemporalData"
+		}
+	}
+}
