@@ -11,6 +11,9 @@
 		"alejobd_password": {
 			"value": ""
 		},
+		"RestServiceAlejo_properties_typeProperties_url": {
+			"value": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
+		},
 		"Xm_database_properties_typeProperties_server": {
 			"value": "xmserverdb.database.windows.net"
 		},

@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'alejobd'"
 		},
+		"RestServiceAlejo_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
+		},
 		"Xm_database_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "xmserverdb.database.windows.net"
@@ -71,6 +75,9 @@
 					},
 					"alejobd_password": {
 						"value": "[parameters('alejobd_password')]"
+					},
+					"RestServiceAlejo_properties_typeProperties_url": {
+						"value": "[parameters('RestServiceAlejo_properties_typeProperties_url')]"
 					},
 					"Xm_database_properties_typeProperties_server": {
 						"value": "[parameters('Xm_database_properties_typeProperties_server')]"
