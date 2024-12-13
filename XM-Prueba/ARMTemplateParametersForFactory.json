@@ -11,6 +11,9 @@
 		"alejobd_password": {
 			"value": ""
 		},
+		"DiaHabil_properties_typeProperties_url": {
+			"value": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
+		},
 		"RestServiceAlejo_properties_typeProperties_url": {
 			"value": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
 		},
@@ -31,9 +34,6 @@
 		},
 		"alejobd_properties_typeProperties_userName": {
 			"value": "alejo"
-		},
-		"DiaHabil_properties_typeProperties_url": {
-			"value": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
 		}
 	}
 }

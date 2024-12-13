@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'alejobd'"
 		},
+		"DiaHabil_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
+		},
 		"RestServiceAlejo_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
@@ -42,10 +46,6 @@
 		"alejobd_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "alejo"
-		},
-		"DiaHabil_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -80,6 +80,9 @@
 					"alejobd_password": {
 						"value": "[parameters('alejobd_password')]"
 					},
+					"DiaHabil_properties_typeProperties_url": {
+						"value": "[parameters('DiaHabil_properties_typeProperties_url')]"
+					},
 					"RestServiceAlejo_properties_typeProperties_url": {
 						"value": "[parameters('RestServiceAlejo_properties_typeProperties_url')]"
 					},
@@ -100,9 +103,6 @@
 					},
 					"alejobd_properties_typeProperties_userName": {
 						"value": "[parameters('alejobd_properties_typeProperties_userName')]"
-					},
-					"DiaHabil_properties_typeProperties_url": {
-						"value": "[parameters('DiaHabil_properties_typeProperties_url')]"
 					}
 				}
 			},
