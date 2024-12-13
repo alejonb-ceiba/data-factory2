@@ -1,13 +1,14 @@
 {
 	"name": "DiaHabil",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
 			"url": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net",
 			"enableServerCertificateValidation": true,
-			"authenticationType": "Anonymous"
+			"authenticationType": "Anonymous",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDhDQTIyRkY3LUVFNjYtNEJDQS05RDA2LTEwNUMyQTE4Q0IwNF9kYmQ1MjJlNy1lZWU4LTRjNGItODliMS0yNDE1NTkzZmMyOTQiDQp9"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/linkedservices"
+	}
 }
