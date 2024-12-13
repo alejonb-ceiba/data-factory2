@@ -42,6 +42,10 @@
 		"alejobd_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "alejo"
+		},
+		"DiaHabil_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
 		}
 	},
 	"variables": {
@@ -121,8 +125,10 @@
 								"datasetParameters": {
 									"sourceApiAlejo": {},
 									"sourceBdXMLu": {},
+									"source1": {},
 									"sink1": {},
-									"sink2": {}
+									"sink2": {},
+									"sink3": {}
 								}
 							},
 							"staging": {},
@@ -204,6 +210,32 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "Valores"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Xm_database')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServerLuData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Xm_database",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Dato",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "TemporalData"
 				}
 			},
 			"dependsOn": [
@@ -473,6 +505,13 @@
 								"type": "DatasetReference"
 							},
 							"name": "sourceBdXMLu"
+						},
+						{
+							"dataset": {
+								"referenceName": "RestResource1",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
 						}
 					],
 					"sinks": [
@@ -489,6 +528,9 @@
 								"type": "DatasetReference"
 							},
 							"name": "sink2"
+						},
+						{
+							"name": "sink3"
 						}
 					],
 					"transformations": [
@@ -515,6 +557,25 @@
 						},
 						{
 							"name": "filter2"
+						},
+						{
+							"name": "flatten2"
+						},
+						{
+							"name": "derivedColumn2"
+						},
+						{
+							"name": "filter3"
+						},
+						{
+							"name": "externalCall1",
+							"linkedService": {
+								"referenceName": "DiaHabil",
+								"type": "LinkedServiceReference"
+							}
+						},
+						{
+							"name": "createUrl"
 						}
 					],
 					"scriptLines": [
@@ -541,6 +602,17 @@
 						"     validateSchema: false,",
 						"     isolationLevel: 'READ_UNCOMMITTED',",
 						"     format: 'table') ~> sourceBdXMLu",
+						"source(output(",
+						"          body as (numeroPagina as boolean, tamanoPagina as short, totalRegistros as short, valores as (activoDesde as string, fechaCreacion as string, fechaModificacion as string, idParametro as string, idVigenciaParametro as string, valor as double, vigenteDesde as string, vigenteHasta as string)[]),",
+						"          headers as [string,string]",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     httpMethod: 'GET',",
+						"     timeout: 30,",
+						"     headers: ['Authorization' -> 'Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImEyWm9IcVVBYkU2cHl6enR5RTZka1JGQmVoRTd2RFJERUEyRWloUGVaUWsiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiI2ZjM1YzU2ZS0yYjY2LTQyNjEtOGU3Yi1hMmMwMTdmZWU2ZjMiLCJpc3MiOiJodHRwczovL2IyY2JpYmNvbXB0cmFuc3NnZGxsLmIyY2xvZ2luLmNvbS9hMTgyNGIzMS1lZDkzLTQ1NGItOTJjYS1mNjE5MzA0ZDg4NmQvdjIuMC8iLCJleHAiOjE3MzMzNDcwMzEsIm5iZiI6MTczMzM0MzQzMSwibmFtZSI6InVua25vd24iLCJ0aWQiOiJhMTgyNGIzMS1lZDkzLTQ1NGItOTJjYS1mNjE5MzA0ZDg4NmQiLCJpc19leHRlcm5hbCI6ZmFsc2UsImF6cGFjciI6IjEiLCJzdWIiOiIyZjMxYmY5Yi02MjY5LTQwNjctYWU5MS1jNzhlMGJiM2Q1OWEiLCJvaWQiOiIyZjMxYmY5Yi02MjY5LTQwNjctYWU5MS1jNzhlMGJiM2Q1OWEiLCJ2ZXIiOiIyLjAiLCJhenAiOiI2ZjM1YzU2ZS0yYjY2LTQyNjEtOGU3Yi1hMmMwMTdmZWU2ZjMiLCJpYXQiOjE3MzMzNDM0MzF9.kT5GezAoP0at2o1fRWCoPHV6hPBpxtCQoUNoayKs2PzFqGKJ6l6GNVE8YLOXJ5hOV8eLdxUpM6iTplv7FpkShKfYKmXiSTlCCa-xRo1O7O3IgDhV8Xjf_uARJD2_JNBUM6GHcV7MG-DU1Cr9nwWCn63HHgYP1-pW4HPOhT8gp2dFqrKI9vzMXIvj1xv5VDp5XJ2HMFUR_1wOctUORTzIqDlnFy_G65F4BV5_l-0f_2lzNnYe5ym00nlWuShK0-ndVpZq4NR6sre1_ZaWKC9VhuEGCT8H6n8rqvTLY4WH4sLaVE_vZikkMDtJW4eh58bgbmk0Pc6dyV8BSe6vY6f5yA'],",
+						"     paginationRules: ['supportRFC5988' -> 'true'],",
+						"     responseFormat: ['type' -> 'json', 'documentForm' -> 'singleDocument']) ~> source1",
 						"sourceBdXMLu filter(Indicador == 9) ~> ObtenerRegistrosIndicador9",
 						"ObtenerRegistrosIndicador9 sort(desc(Fecha, true)) ~> OrdenarPorFecha",
 						"OrdenarPorFecha window(desc(Fecha, true),",
@@ -559,7 +631,40 @@
 						"     skipDuplicateMapOutputs: false) ~> flatten1",
 						"flatten1 derive(ultimo_dia_mes = lastDayOfMonth(toDate(valores.vigenteDesde)),",
 						"          mes := toDate(valores.vigenteDesde)) ~> derivedColumn1",
-						"derivedColumn1 filter(ultimo_dia_mes == toDate(valores.vigenteDesde)) ~> filter2",
+						"derivedColumn1 filter(ultimo_dia_mes == toDate(valores.vigenteDesde) || (ultimo_dia_mes >= toDate(valores.vigenteDesde) && ultimo_dia_mes <= toDate(valores.vigenteHasta))) ~> filter2",
+						"source1 foldDown(unroll(body.valores),",
+						"     mapColumn(",
+						"          valores = body.valores",
+						"     ),",
+						"     skipDuplicateMapInputs: false,",
+						"     skipDuplicateMapOutputs: false) ~> flatten2",
+						"flatten2 derive(ultimo_dia_mes = lastDayOfMonth(toDate(valores.vigenteDesde))) ~> derivedColumn2",
+						"derivedColumn2 filter(ultimo_dia_mes == toDate(valores.vigenteDesde) || (ultimo_dia_mes >= toDate(valores.vigenteDesde) && ultimo_dia_mes <= toDate(valores.vigenteHasta))) ~> filter3",
+						"createUrl call(mapColumn(",
+						"          each(match(/* All input columns */ true()),",
+						"               /* Input name */ $$ = $$)",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     output(",
+						"          headers as [string,string],",
+						"          status as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     format: 'rest',",
+						"     store: 'restservice',",
+						"     timeout: 30,",
+						"     requestInterval: 0,",
+						"     headers = [Authorization -> Bearer 1],",
+						"     httpMethod: 'GET',",
+						"     rowRelativeUrl: 'path_url',",
+						"     headerColumnName: 'headers',",
+						"     bodyColumnName: 'body',",
+						"     statusColumnName: 'status',",
+						"     addResponseCode: true,",
+						"     requestFormat: ['type' -> 'json'],",
+						"     responseFormat: ['type' -> 'json', 'documentForm' -> 'singleDocument']) ~> externalCall1",
+						"filter3 derive(path_url = \"/Festivos/ultimo-dia-habil/CO/{month(ultimo_dia_mes)}/{year(ultimo_dia_mes)}\") ~> createUrl",
 						"filter2 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
@@ -590,40 +695,57 @@
 						"     upsertable:false,",
 						"     format: 'table',",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> sink2"
+						"     skipDuplicateMapOutputs: true) ~> sink2",
+						"externalCall1 sink(validateSchema: false,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     store: 'cache',",
+						"     format: 'inline',",
+						"     output: false,",
+						"     saveOrder: 1) ~> sink3"
 					]
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/RestResource1')]",
 				"[concat(variables('factoryId'), '/datasets/SqlServerLu')]",
-				"[concat(variables('factoryId'), '/datasets/SqlServerLuData')]"
+				"[concat(variables('factoryId'), '/datasets/SqlServerLuData')]",
+				"[concat(variables('factoryId'), '/linkedServices/DiaHabil')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SqlServerLuData')]",
+			"name": "[concat(parameters('factoryName'), '/DiaHabil')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('DiaHabil_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Festivos')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "Xm_database",
+					"referenceName": "DiaHabil",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [
-					{
-						"name": "Dato",
-						"type": "date"
-					}
-				],
+				"type": "RestResource",
 				"typeProperties": {
-					"schema": "dbo",
-					"table": "TemporalData"
-				}
+					"relativeUrl": "/Festivos/ultimo-dia-habil/CO"
+				},
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Xm_database')]"
+				"[concat(variables('factoryId'), '/linkedServices/DiaHabil')]"
 			]
 		}
 	]

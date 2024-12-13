@@ -43,6 +43,10 @@
 			"type": "string",
 			"defaultValue": "alejo"
 		},
+		"DiaHabil_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -96,6 +100,9 @@
 					},
 					"alejobd_properties_typeProperties_userName": {
 						"value": "[parameters('alejobd_properties_typeProperties_userName')]"
+					},
+					"DiaHabil_properties_typeProperties_url": {
+						"value": "[parameters('DiaHabil_properties_typeProperties_url')]"
 					}
 				}
 			},
