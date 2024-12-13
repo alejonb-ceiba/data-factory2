@@ -1,0 +1,15 @@
+{
+	"name": "Festivos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DiaHabil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/Festivos/ultimo-dia-habil/CO"
+		},
+		"schema": []
+	}
+}
