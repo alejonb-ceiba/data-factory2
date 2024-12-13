@@ -79,7 +79,7 @@
 				{
 					"name": "externalCall1",
 					"linkedService": {
-						"referenceName": "RestServiceAlejo",
+						"referenceName": "DiaHabil",
 						"type": "LinkedServiceReference"
 					}
 				},
