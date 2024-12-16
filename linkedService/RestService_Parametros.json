@@ -1,0 +1,12 @@
+{
+	"name": "RestService_Parametros",
+	"properties": {
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://appparametrosfake-gkbybbe7hcgne9c2.canadacentral-01.azurewebsites.net",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
