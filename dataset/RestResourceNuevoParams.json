@@ -1,0 +1,15 @@
+{
+	"name": "RestResourceNuevoParams",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "RestService_Parametros",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "/v1/aplicaciones/337/parametros/TCRM/valores"
+		},
+		"schema": []
+	}
+}
